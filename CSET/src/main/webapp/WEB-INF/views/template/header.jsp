@@ -1,18 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${pageTitle }</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
+function fn_memberLogout() {
+	swal({
+		  title: "정말로그아웃하시겠습니까?",
+		  text: "",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			location.href = 'memberLogout';
+		    swal("Poof! Your imaginary file has been deleted!", {
+		      icon: "success",
+		    });
+		  } else {
+		    swal("로그아웃취소합니다");
+		  }
+		});
+};
 
-	function fn_memberLogout() {
+
+	/* function fn_memberLogout() {
 		if(confirm('로그아웃 하시겠습니까?')){
 			location.href = 'memberLogout';
 		}
-	}
+	} */
 	
 	function fn_memberleave(){
 		if(confirm('정말 회원탈퇴 하시겠습니까?')){

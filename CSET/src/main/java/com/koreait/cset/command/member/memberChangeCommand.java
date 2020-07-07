@@ -1,4 +1,4 @@
-package com.koreait.cset.command;
+package com.koreait.cset.command.member;
 
 import java.util.Map;
 

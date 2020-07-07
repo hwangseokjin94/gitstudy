@@ -1,7 +1,5 @@
 package com.koreait.cset.controller;
 
-import java.nio.channels.FileChannel.MapMode;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,15 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.koreait.cset.command.memberChangeCommand;
-import com.koreait.cset.command.memberDeleteCommand;
-import com.koreait.cset.command.memberDetailCommand;
-import com.koreait.cset.command.memberIdCheck;
-import com.koreait.cset.command.memberInsertCommand;
-import com.koreait.cset.command.memberListCommand;
-import com.koreait.cset.command.memberLoginCommand;
-import com.koreait.cset.command.memberLogoutCommand;
-
+import com.koreait.cset.command.member.memberChangeCommand;
+import com.koreait.cset.command.member.memberDeleteCommand;
+import com.koreait.cset.command.member.memberDetailCommand;
+import com.koreait.cset.command.member.memberInsertCommand;
+import com.koreait.cset.command.member.memberListCommand;
+import com.koreait.cset.command.member.memberLoginCommand;
+import com.koreait.cset.command.member.memberLogoutCommand;
 import com.koreait.cset.common.CsetCommand;
 import com.koreait.cset.dao.MemberDAO;
 import com.koreait.cset.dto.MemberDTO;
@@ -52,8 +48,11 @@ public class MemberController {
 	}
 	//1.회원가입하기
 	@RequestMapping(value="memberInsert",method=RequestMethod.POST)
-	public String memberJoin(HttpServletRequest request ,Model model) {
+	public String memberJoin(HttpServletRequest request ,
+							HttpServletResponse response,
+										Model model) {
 		model.addAttribute("request",request);
+		model.addAttribute("response",response);
 		memberCommand = new memberInsertCommand();
 		memberCommand.execute(sqlSession, model);	
 		return"redirect:index";
@@ -62,8 +61,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="memberIdCheck", produces="application/json; charset=utf-8")
 	public String memberIdCheck(@RequestParam("mId") String mId,
-				HttpServletRequest request,
-				Model model){
+									HttpServletRequest request,
+													Model model){
 		JSONObject obj = new JSONObject();
 		MemberDTO mDTO = new MemberDTO();
 		MemberDAO mDAO = sqlSession.getMapper(MemberDAO.class);
@@ -178,8 +177,8 @@ public class MemberController {
 		@ResponseBody
 		@RequestMapping(value="memberFindId",  produces="text/html; charset=utf-8")
 		public String memberFindId(@RequestParam("mEmail") String mEmail,
-					HttpServletRequest request,
-					Model model){			
+												HttpServletRequest request,
+																Model model){			
 			MemberDTO mDTO = new MemberDTO();
 			MemberDAO mDAO = sqlSession.getMapper(MemberDAO.class);
 			mDTO = mDAO.memberselectBymEmail(mEmail);
@@ -189,9 +188,7 @@ public class MemberController {
 				responseText = mDTO.getmId();
 			} else {
 				responseText = "NO";  // 이메일과 일치하는 회원이 없을 때 응답결과는 스스로 정한다.
-			}
-			
-			
+			}						
 			return responseText;
 		}
 	
