@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.cset.dao.MemberDAO">
+
+
+	<insert id="memberInsert">
+	
+	INSERT INTO MEMBERS (MNO,MSNO,MID,MNAME,MPW,MADDR,MPNO,MEMAIL,MPHONE,MPAYMENT,MPOINT,MGRADE,MREGDATE)
+	VALUES (MEMBERS_SEQ.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},NULL,NULL,NULL,SYSDATE)
+	</insert>
+	<select id="selectBymIdmPw" resultType="com.koreait.cset.dto.MemberDTO" parameterType="com.koreait.cset.dto.MemberDTO">
+		SELECT *
+		FROM MEMBERS
+		WHERE MID = #{mId} AND MPW = #{mPw}
+	</select>
+<select id="memberselectList" resultType="com.koreait.cset.dto.MemberDTO">
+		SELECT MNO,MSNO,MID,MNAME,MPW,MADDR,MPNO,MEMAIL,MPHONE,MPAYMENT,MPOINT,MGRADE,MREGDATE
+		FROM MEMBERS
+		ORDER BY MNO
+	</select>
+	<delete id="memeberDelete" parameterType="String">
+		DELETE FROM MEMBERS
+		WHERE MID = #{mId}
+	</delete>
+	<update id="memberChange">
+		UPDATE MEMBERS
+		SET MNAME = #{param1}, MEMAIL = #{param2}, MPHONE = #{param3}, MADDR = #{param4}
+		WHERE MNO =#{param5}
+	
+	</update>
+
+    <select id="memberselectByNo" parameterType="int" resultType="com.koreait.cset.dto.MemberDTO">
+		SELECT MNO,MSNO,MID,MNAME,MPW,MADDR,MPNO,MEMAIL,MPHONE,MPAYMENT,MPOINT,MGRADE,MREGDATE
+		FROM MEMBERS
+		WHERE MNO = #{mNo}
+	</select>
+
+	<select id="memberselectBymId" parameterType="String" resultType="com.koreait.cset.dto.MemberDTO">
+		SELECT *
+		FROM MEMBERS
+		WHERE MID = #{mId}
+	</select>
+
+	<select id="memberselectBymEmail" parameterType="String" resultType="com.koreait.cset.dto.MemberDTO">
+		SELECT *
+		FROM MEMBERS
+		WHERE MEMAIL = #{mEmail}
+	</select>
+
+
+
+</mapper>
