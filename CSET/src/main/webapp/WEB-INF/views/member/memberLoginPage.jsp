@@ -120,7 +120,7 @@
 
 
 
-<form name='login_form' id='login_form' style="height:100%" method="post">
+<form name='login_form' id='login_form' style="height:100%"  method="post">
 		<input type="hidden" name='mode' value="login">
 		<input type="hidden" name="re_url" value="">
             <div class="login_wrap">
