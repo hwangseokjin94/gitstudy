@@ -5,23 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css" href="resources/assets/css/member.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<style>
-	.login-box table {
-		border-collapse: collapse;
-		width: 400px;
-		margin: auto;
-	}
-	.login-box table td {
-		border: 1px solid black;
-		padding: 5px;		
-	}
-	.login-box table tfoot {
-		text-align: center;
-	}
-</style>
+
 <script type="text/javascript">
 	
 	$(document).ready(function(){
@@ -97,8 +86,10 @@
 	}
 	
 </script>
-<div class="login-box">
+<div class="login_wrap ">
 	<form method="POST">
+	 <div class="lb_title">LOGIN</div>
+         <div class="lb_text">회원전용 페이지 입니다. 로그인 후 이용하세요.</div>
 		<table>
 			<tbody>
 				<tr>
@@ -126,5 +117,43 @@
 		</table>
 	</form>
 </div>
+
+
+
+<form name='login_form' id='login_form' style="height:100%" method="post">
+		<input type="hidden" name='mode' value="login">
+		<input type="hidden" name="re_url" value="">
+            <div class="login_wrap">
+                <div class="login_logo"><img src="" alt="클로셋"></div>
+                <div class="login_logo_text">당신의 옷장을 챙겨주는 클로셋입니다.</div>
+                <div class="login_box">
+                    <div class="lb_title">LOGIN</div>
+                    <div class="lb_text">회원전용 페이지 입니다. 로그인 후 이용하세요.</div>
+                    <div class="lb_id"><input type="text" id="mId" name="mId" class="" value="" placeholder="아이디" /></div>
+                    <div class="lb_pw"><input type="password" name="mPw" class="" value="" placeholder="비밀번호" /></div>
+                    <div class="lb_button"><button type="button" class="bt_100p_55 bt_blue_bor_2" onclick="fn_memberLogin(this.form)" >로그인</button></div>
+						<input id="saveIDCheck" type="checkbox" name="saveIDCheck" value="true" checked>아이디 기억하기
+						<br><br>
+                    <div class="lb_search_join">
+                        <a href="memberFindIdPage">아이디찾기</a>
+                        <span>│</span>
+                        <a href="">비밀번호 찾기</a>
+						<span>│</span>
+                        <a href="" class="fc525">회원가입</a>
+                    </div>
+                    <div class="lb_exit"><button type="button" class="r_cancel_bt" onclick="">나가기</button></div>
+                </div> <!-- login_box -->
+            </div> <!-- login_wrap -->
+		</form>	
+		</section>
+
+
+
+
+
+
+
+
+
 </body>
 </html>
