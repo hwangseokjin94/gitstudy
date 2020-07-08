@@ -1,6 +1,7 @@
 package com.koreait.cset.dto;
 
 public class ProductDTO {
+
  private int pNo,pPrice,pDisrate;
  private String pName,pFilename,pCategory,pCategory_sub,pBrand,pSize;
  public ProductDTO() {
@@ -74,6 +75,6 @@ public void setpSize(String pSize) {
 	this.pSize = pSize;
 }
  
+}
 
  
-}

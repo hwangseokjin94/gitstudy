@@ -139,7 +139,11 @@
                         <span>│</span>
                         <a href="">비밀번호 찾기</a>
 						<span>│</span>
+<<<<<<< HEAD
                         <a href="memberInsertPage" class="fc525">회원가입</a>
+=======
+                        <a href="" class="fc525">회원가입</a>
+>>>>>>> refs/remotes/origin/master
                     </div>
                     <div class="lb_exit"><button type="button" class="r_cancel_bt" onclick="">나가기</button></div>
                 </div> <!-- login_box -->

@@ -64,4 +64,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET PPRICE = #{param1}
 		WHERE PNO =#{param2}	
 	</update>
+
+
+
+
+
 </mapper>

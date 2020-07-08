@@ -3,6 +3,7 @@ package com.koreait.cset.dao;
 import java.util.ArrayList;
 
 import com.koreait.cset.dto.MemberDTO;
+
 import com.koreait.cset.dto.ProductDTO;
 
 public interface MemberDAO {
@@ -30,4 +31,5 @@ public interface MemberDAO {
 	public ArrayList<ProductDTO> selectProductList();
 	//관리자가 상품 가격변경하기
 	public void memberProductPriceChange(int afterPrice ,int pNo);
+
 }

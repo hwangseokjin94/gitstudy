@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,6 +95,7 @@ function fn_memberLogout() {
 				<input type="button" value="게시판" onclick="location.href='" />
 				<input type="button" value="회원목록" onclick="location.href='memberListPage'" />
 				<input type="button" value="상품등록페이지 이동하기" onclick="location.href='memberProductInsertPage'" />
+
 			</c:if>
 			
 			
