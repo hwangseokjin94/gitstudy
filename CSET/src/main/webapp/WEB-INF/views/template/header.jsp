@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +16,7 @@ function fn_memberLogout() {
 		  icon: "warning",
 		  buttons: true,
 		  dangerMode: true,
-		})
-		.then((willDelete) => {
+		}).then((willDelete) => {
 		  if (willDelete) {
 			location.href = 'memberLogout';
 		    swal("Poof! Your imaginary file has been deleted!", {
@@ -36,7 +35,8 @@ function fn_memberLogout() {
 		}
 	} */
 	
-	function fn_memberleave(){
+	
+	function fn_memberLeavePage(){
 		if(confirm('정말 회원탈퇴 하시겠습니까?')){
 			location.href = 'memberLeavePage';
 		}
@@ -94,6 +94,8 @@ function fn_memberLogout() {
 				<input type="button" value="마이페이지" onclick="location.href='memberViewPage'" />
 				<input type="button" value="게시판" onclick="location.href='" />
 				<input type="button" value="회원목록" onclick="location.href='memberListPage'" />
+				<input type="button" value="상품등록페이지 이동하기" onclick="location.href='memberProductInsertPage'" />
+
 			</c:if>
 			
 			

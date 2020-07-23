@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.koreait.cset.dto.MemberDTO;
 
+import com.koreait.cset.dto.ProductDTO;
+
 public interface MemberDAO {
 
 	//회원가입
@@ -22,4 +24,12 @@ public interface MemberDAO {
 	public MemberDTO memberselectBymId(String mId);
 	//이메일로아이디찾기
 	public MemberDTO memberselectBymEmail(String mEmail); 
+	//관리자로 상품업로드하기
+	//	pName pPrice pCategory pCategory_sub pBrand
+	public void memberProductInsert(String pName,String saveFilename,int pPrice,String pCategory,String pCategory_sub,String pBrand);
+	//관리자가 상품업로드한페이지보기
+	public ArrayList<ProductDTO> selectProductList();
+	//관리자가 상품 가격변경하기
+	public void memberProductPriceChange(int afterPrice ,int pNo);
+
 }

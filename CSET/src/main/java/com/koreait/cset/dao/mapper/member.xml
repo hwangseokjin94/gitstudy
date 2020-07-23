@@ -49,6 +49,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM MEMBERS
 		WHERE MEMAIL = #{mEmail}
 	</select>
+	<insert id="memberProductInsert">
+		INSERT INTO PRODUCTS (PNO, PNAME, PFILENAME, PPRICE, PCATEGORY, PCATEGORY_SUB, PBRAND, PDISRATE, PSIZE)
+		VALUES (PRODUCTS_SEQ.NEXTVAL, #{param1},#{param2},#{param3},#{param4},#{param5},#{param6},0,NULL)
+	</insert>
+	<select id="selectProductList" resultType="com.koreait.cset.dto.ProductDTO">
+		SELECT PNO, PNAME, PFILENAME, PPRICE, PCATEGORY, PCATEGORY_SUB, PBRAND, PDISRATE, PSIZE
+		FROM PRODUCTS
+		ORDER BY PNO DESC
+	</select>
+
+	<update id="memberProductPriceChange" parameterType="int">
+		UPDATE PRODUCTS
+		SET PPRICE = #{param1}
+		WHERE PNO =#{param2}	
+	</update>
+
+
 
 
 

@@ -12,18 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.koreait.cset.command.member.memberChangeCommand;
-import com.koreait.cset.command.member.memberDeleteCommand;
-import com.koreait.cset.command.member.memberDetailCommand;
-import com.koreait.cset.command.member.memberInsertCommand;
-import com.koreait.cset.command.member.memberListCommand;
-import com.koreait.cset.command.member.memberLoginCommand;
-import com.koreait.cset.command.member.memberLogoutCommand;
+import com.koreait.cset.command.memberChangeCommand;
+import com.koreait.cset.command.memberDeleteCommand;
+import com.koreait.cset.command.memberDetailCommand;
+import com.koreait.cset.command.memberInsertCommand;
+import com.koreait.cset.command.memberListCommand;
+import com.koreait.cset.command.memberLoginCommand;
+import com.koreait.cset.command.memberLogoutCommand;
+import com.koreait.cset.command.memberProductInsertCommand;
+import com.koreait.cset.command.memberProductListCommand;
 import com.koreait.cset.common.CsetCommand;
 import com.koreait.cset.dao.MemberDAO;
 import com.koreait.cset.dto.MemberDTO;
+import com.koreait.cset.dto.ProductDTO;
 
 @Controller
 public class MemberController {
@@ -41,18 +46,15 @@ public class MemberController {
 	public String goIndex1() {
 		return"index";
 	}
-	
+	//회원가입페이지로이동하기
 	@RequestMapping("memberInsertPage")
 	public String memberInsertPage() {
 		return "member/memberInsertPage";
 	}
 	//1.회원가입하기
 	@RequestMapping(value="memberInsert",method=RequestMethod.POST)
-	public String memberJoin(HttpServletRequest request ,
-							HttpServletResponse response,
-										Model model) {
+	public String memberJoin(HttpServletRequest request ,Model model) {
 		model.addAttribute("request",request);
-		model.addAttribute("response",response);
 		memberCommand = new memberInsertCommand();
 		memberCommand.execute(sqlSession, model);	
 		return"redirect:index";
@@ -61,8 +63,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="memberIdCheck", produces="application/json; charset=utf-8")
 	public String memberIdCheck(@RequestParam("mId") String mId,
-									HttpServletRequest request,
-													Model model){
+				HttpServletRequest request,
+				Model model){
 		JSONObject obj = new JSONObject();
 		MemberDTO mDTO = new MemberDTO();
 		MemberDAO mDAO = sqlSession.getMapper(MemberDAO.class);
@@ -177,8 +179,8 @@ public class MemberController {
 		@ResponseBody
 		@RequestMapping(value="memberFindId",  produces="text/html; charset=utf-8")
 		public String memberFindId(@RequestParam("mEmail") String mEmail,
-												HttpServletRequest request,
-																Model model){			
+					HttpServletRequest request,
+					Model model){			
 			MemberDTO mDTO = new MemberDTO();
 			MemberDAO mDAO = sqlSession.getMapper(MemberDAO.class);
 			mDTO = mDAO.memberselectBymEmail(mEmail);
@@ -188,9 +190,70 @@ public class MemberController {
 				responseText = mDTO.getmId();
 			} else {
 				responseText = "NO";  // 이메일과 일치하는 회원이 없을 때 응답결과는 스스로 정한다.
-			}						
+			}
+			
+			
 			return responseText;
 		}
+	
+	
+	//15회원가입페이지로이동하기
+	@RequestMapping("memberProductInsertPage")
+	public String memberProductInsertPage() {
+			return "member/memberProductInsertPage";
+	}	
+		
+	// 16관리자페이지에서 상품업로드
+	@RequestMapping(value="memberProductInsert", method=RequestMethod.POST)
+	public String memberProductInsert(MultipartHttpServletRequest mr,
+													Model model) {		
+		model.addAttribute("mr", mr);
+		memberCommand = new memberProductInsertCommand();		
+		memberCommand.execute(sqlSession, model);		
+		return "redirect:index";	
+		
+	}
+		
+	//17.관리자페이지 상품리스트memberProductListPage
+	@RequestMapping("memberProductListPage")
+	public String memberProductListPage(Model model) {
+		memberCommand = new memberProductListCommand();
+		memberCommand.execute(sqlSession, model);	
+		
+		return "member/memberProductListPage";
+	}
+		
+		
+	
+	
+	//18.관리자상품가격변경하기
+	@ResponseBody
+	@RequestMapping(value="memberUpdatePrice", method=RequestMethod.POST, produces="application/json; charset=utf-8")
+	public String memberupdatePrice(@RequestParam("afterPrice") String afterPrice,
+										@RequestParam("pNo") String pNo,
+										Model model){
+		JSONObject obj = new JSONObject();
+		MemberDTO mDTO = new MemberDTO();
+		ProductDTO pDTO = new ProductDTO();
+		
+		System.out.println("변경 후 가격: " +afterPrice + " 제품 번호: " + pNo);
+		
+		int ap = Integer.parseInt( afterPrice );
+		int pn = Integer.parseInt( pNo );
+		
+		
+		MemberDAO mDAO = sqlSession.getMapper(MemberDAO.class);
+	    mDAO.memberProductPriceChange( ap, pn );
+		
+		if ( mDTO != null ) {
+			obj.put("result", "EXIST");
+		} else {
+			obj.put("result", "");
+		}
+		
+		return obj.toJSONString();
+	}
+	
 	
 /*	//회원탈퇴하기
 	@SuppressWarnings("unchecked")
