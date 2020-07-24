@@ -86,6 +86,10 @@ $(document).ready(function(){
 <input type="submit" value="검색">
 </form>
 
+<input type="button" onclick="location.href='index2'">
+
+
+
 
 
 

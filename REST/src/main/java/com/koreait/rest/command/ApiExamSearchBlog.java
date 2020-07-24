@@ -14,17 +14,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.ui.Model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koreait.rest.common.RestCommand;
-
-
 
 public class ApiExamSearchBlog implements RestCommand {
 
 	@Override
 	public void execute(Model model) {
-		Map<String, Object> map = model.asMap();
+		Map<String, Object> map = model.asMap();		
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		String clientId = "FBCxmHiicDqy3msJBg8t"; //애플리케이션 클라이언트 아이디값"
 		String clientSecret = "B02mh11O7Y"; //애플리케이션 클라이언트 시크릿값"
@@ -45,6 +47,19 @@ public class ApiExamSearchBlog implements RestCommand {
 		String responseBody = get(apiURL,requestHeaders);
 		
 		System.out.println(responseBody);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JSONArray jsonArray = new JSONArray();
+		
+		JSONParser parser = new JSONParser();
+		//Object obj = parser.parse( responseBody );
+		//JSONObject jsonObj = (JSONObject) obj;
+		try {
+			//mapper.readValue(responseBody, NaverDTO.class);
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	
 	}
     private static String get(String apiUrl, Map<String, String> requestHeaders){
