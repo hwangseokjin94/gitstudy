@@ -87,6 +87,7 @@ $(document).ready(function(){
 </form>
 
 <input type="button" onclick="location.href='index2'">
+<input type="button" onclick="location.href='index3'">
 
 
 

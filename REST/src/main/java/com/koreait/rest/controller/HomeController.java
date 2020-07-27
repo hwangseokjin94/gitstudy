@@ -29,6 +29,10 @@ public class HomeController {
 	public String index2() {
 		return"index2";
 	}	
+	@RequestMapping(value="index3",method=RequestMethod.GET)
+	public String index3() {
+		return"index3";
+	}	
 /*	//http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=f3635800e8b413f86942d920dd11a061
 	@ResponseBody
 	@RequestMapping(value="searchWeather", method=RequestMethod.POST, produces="application/json; charset=utf-8")
