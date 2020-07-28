@@ -10,4 +10,11 @@ public interface UserDao {
 	
 	public UserDto userSelectById();
 	
+	public UserDto selectByUserId(String userId);
+	
+	public int insertUser(UserDto userDto);
+	
+	public int updateUser(UserDto userDto);
+	
+	public int deleteUser(String userId);
 }
