@@ -131,7 +131,10 @@
 
 
 <h3>코로나19 </h3>
-	<table>		
+<input type="button" value="이동" onclick="location.href='index2'">
+<div class="wrap">
+	<div class="left">
+		<table>		
 		<thead>
 			<tr>
 				<td>연번</td>			
@@ -145,6 +148,14 @@
 		</thead>
 		<tbody ></tbody>
 	</table>
+		
+	</div>
+	<div class="right">
+	
+	</div>
+	
+</div>
+
 
 
 

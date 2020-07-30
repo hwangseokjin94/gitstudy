@@ -24,6 +24,10 @@ public class kakaoController {
 	public String goIndex() {
 		return "index";
 	}
+	@RequestMapping("index2")
+	public String goIndex2() {
+		return "index2";
+	}
 	@RequestMapping(value="korona",method=RequestMethod.GET, produces="application/json; charset = utf-8")
 	@ResponseBody
 	public Map<String, Object>  selectKoronaList(Model model){
