@@ -31,7 +31,11 @@ public class kakaoController {
 		Map<String, Object> map = koronaCommand.execute(sqlSession, model);
 		koronaCommand.execute(sqlSession, model);
 		return map;
-		
-		
+			
 	}
+	
+	
+	
+	
+	
 }

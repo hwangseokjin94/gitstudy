@@ -14,11 +14,12 @@
 
 
 <body>
-<h1>지도</h1>
-<div id="map" style="width:500px;height:400px;"></div>
+<h1>코로나동선지도</h1>
+<div id="map" style="width:800px;height:700px;"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d369b5be45f5c57eb9fb2f86fcb0fc05"></script>
 <script>
 	$(function() {
+		
 		var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -26,6 +27,8 @@
 		};
 		var map = new kakao.maps.Map(container, options);
 		koronaList();
+
+		
 	});
 	
 	/*사용자 목록  가저오기*/
@@ -64,15 +67,29 @@
 			.append($('<td>').html(korona.kLongitude) )
 			.append($('<td>').html('<button id="btnSelect">조회</button>') )
 			.append($('<td>').html('<button id="btnDelete">삭제</button>') )
+			.append($('<input type = "hidden" id ="hidden_kNo"/>').val(korona.kNo))
+			.append($('<input type = "hidden" id ="hidden_kLatitude"/>').val(korona.kLatitude))
+			.append($('<input type = "hidden" id ="hidden_kLongitude"/>').val(korona.kLongitude))
+			.append($('<input type = "hidden" id ="hidden_kContent"/>').val(korona.kContent))
 			/* .append($('<input type = "hidden" id="hidden_userId"/>')).val(user.userId) */
 			.appendTo('tbody')
+	/* 		showLocation(latitude, longtitude, content);
+			 */
 			
-			$('#btnSelect').on("click", function(){
-				showLocation(latitude, longtitude, content);
-			});
 		});
 	}
+	
 
+		
+		$('body').on('click','#btnSelect',function(){
+			
+			var latitude = $(this).closest('tr').find('#hidden_kLatitude').val();			
+			var longtitude = $(this).closest('tr').find('#hidden_kLongitude').val();		
+			var content = $(this).closest('tr').find('#hidden_kContent').val();		
+			showLocation(latitude, longtitude, content);
+		});
+		
+	
 	
 	
 	
